@@ -1,0 +1,102 @@
+from pynput.keyboard import Key, Controller
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+import time
+from typing import List
+import getpass
+import os
+import uuid
+import requests
+
+class main():
+    def clear():
+            os.system("clear")
+
+
+    def exercise():
+            c = driver.find_element(By.XPATH, '//*[@id="btn-fermer-instructions"]')
+            c.click()
+            time.sleep(2)
+            char1 = driver.find_element(By.XPATH, '/html/body/section[3]/div/div/div[1]/div[1]/div[2]/span').text
+            time.sleep(3)
+            keyboard.type(char1)
+            setusr = input("nom d'utilisateur compte: ")
+            setpass = getpass.getpass(prompt="mdp compte: ", stream=None)
+
+            clear()
+
+            driver = webdriver.Firefox()
+            keyboard = Controller()
+
+            driver.get('https://covecove.taptouche.com/connexion/')
+
+    def login():
+        connex = driver.find_element(By.ID, "nomUtilisateur")
+        connex.send_keys(setusr)
+
+        connex2 = driver.find_element(By.XPATH, "/html/body/div/section[1]/div[3]/form/div/div/div[1]/div[2]/input")
+        connex2.send_keys(setpass)
+
+        connex3 = driver.find_element(By.XPATH, '//*[@id="boutonValidation"]')
+        connex3.click()
+
+        time.sleep(3)
+
+        connex4 = driver.find_element(By.XPATH, '/html/body/header/nav[1]/div/ul/li[2]/a')
+        connex4.click()
+
+    login()
+
+    print("TapBot V6 a été injecté avec succès!")
+    ex = input("nom de l'éxercise (exercise disponible: jf, dk, sl, aé, un truc secret ;) ): ")
+    if ex == 'jf':
+        jf = driver.find_element(By.CSS_SELECTOR, 'section#section-principale #bloc-exercices .description')
+        jf.click()
+
+        time.sleep(2)
+
+        exercise()
+    elif ex == 'dk':
+        dk = driver.find_element(By.XPATH, '/html/body/section[2]/div/div/div[2]/div[1]/div/ul/li[2]/a/div')
+        dk.click()
+
+        time.sleep(2)
+
+        exercise()
+
+    elif ex == 'sl':
+        sl = driver.find_element(By.XPATH, '/html/body/section[2]/div/div/div[2]/div[1]/div/ul/li[3]/a/div')
+        sl.click()
+
+        time.sleep(2)
+
+        exercise()
+
+    elif ex == 'aé':
+        aé = driver.find_element(By.XPATH, '/html/body/section[2]/div/div/div[2]/div[1]/div/ul/li[4]/a/div')
+        aé.click()
+
+        time.sleep(2)
+
+        exercise()
+
+    elif ex == 'tout finir':
+        clear()
+        print("ok (déso si c'est méga beugé)")
+        print("PS: ne pas aller sur un autre truc pendant que tapbot est en cours d'execution ")
+        er = driver.find_element(By.XPATH, '/html/body/section[2]/div/div/div[2]/div[1]/div/ul/li[1]/a/div')
+        er.click()
+
+        while True:
+            time.sleep(4)
+            exercise()
+            time.sleep(5)
+            keyboard.press(Key.enter)
+
+customer_id = str(uuid.uuid4())
+software_ids = requests.get("https://ssjblue-xxx.github.io/tapbot_site/hwidlist.txt")
+
+if customer_id in software_ids.text:
+    main()
